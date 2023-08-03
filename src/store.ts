@@ -8,7 +8,7 @@ type CartState = {
     total: number;
     addToBasket: (product: Product) => void;
     clearBasket: () => void;
-    // createStore: () => void;
+    createStore: () => void;
     // deleteFromBasket: (product: Product) => void;
 };
 
@@ -66,15 +66,15 @@ export const useCartStore = create<CartState>()(immer((set) => ({
         localStorage.setItem('Basket', JSON.stringify(state.basket));
     }),
 
-    // createStore: () =>set((state) => {
-    //     const dataBasket = localStorage.getItem(`Basket`)
-    //     const dataProducts = localStorage.getItem(`Products`)
-    //     if (dataBasket !== null && dataProducts !== null) {
-    //         state.basket = JSON.parse(dataBasket);
-    //         state.products = JSON.parse(dataProducts)
-    //         state.total = state.basket.reduce((total, product) => total + product.price, 0);
-    //     }
-    // }),
+    createStore: () =>set((state) => {
+        const dataBasket = localStorage.getItem(`Basket`)
+        const dataProducts = localStorage.getItem(`Products`)
+        if (dataBasket !== null && dataProducts !== null) {
+            state.basket = JSON.parse(dataBasket);
+            state.products = JSON.parse(dataProducts)
+            state.total = state.basket.reduce((total, product) => total + product.price, 0);
+        }
+    }),
 
     // deleteFromBasket: (product) => set((state) => {
     //     const updatedProducts = state.products.map((item) =>
