@@ -9,7 +9,7 @@ type CartState = {
     addToBasket: (product: Product) => void;
     clearBasket: () => void;
     createStore: () => void;
-    // deleteFromBasket: (product: Product) => void;
+    deleteFromBasket: (product: Product) => void;
 };
 
 export const useCartStore = create<CartState>()(immer((set) => ({
@@ -76,16 +76,16 @@ export const useCartStore = create<CartState>()(immer((set) => ({
         }
     }),
 
-    // deleteFromBasket: (product) => set((state) => {
-    //     const updatedProducts = state.products.map((item) =>
-    //     item.id === product.id ? { ...item, inBasket: !item.inBasket } : item
-    //     );
-    //     state.products = updatedProducts;
-    //     state.basket = state.basket.filter((item) => item.id !== product.id);
-    //     state.total -= product.price;
-    //     localStorage.setItem('Products', JSON.stringify(state.products));
-    //     localStorage.setItem('Basket', JSON.stringify(state.basket));
-    // }),
+    deleteFromBasket: (product) => set((state) => {
+        const updatedProducts = state.products.map((item) =>
+        item.id === product.id ? { ...item, inBasket: !item.inBasket } : item
+        );
+        state.products = updatedProducts;
+        state.basket = state.basket.filter((item) => item.id !== product.id);
+        state.total -= product.price;
+        localStorage.setItem('Products', JSON.stringify(state.products));
+        localStorage.setItem('Basket', JSON.stringify(state.basket));
+    }),
 
 
 })));
