@@ -17,7 +17,7 @@ const ProductCard:FC<ProductCardProps> = ({product}) => {
     }
     return (
         <div className="border p-4 shadow-md">
-            <img src={process.env.PUBLIC_URL + `/images/${product.image}`} alt={product.name} className="mb-2 w-52 h-52" />
+            <img src={process.env.PUBLIC_URL + `/images/${product.image}`} alt={product.name} className="mb-2 w-64 h-52" />
             <h3 className="text-lg font-semibold">{product.name}</h3>
             <p className="text-gray-600">Price: {product.price} $</p>
             {
