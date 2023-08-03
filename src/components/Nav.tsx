@@ -11,11 +11,17 @@ const Nav = () => {
                     </li>
                 </ul>
             </div>
-            <div className="flex justify-end items-center w-1/3 pr-10">
-                <span className='text-xl m-2'> {total.toFixed(2)} </span>
+            <div className="flex justify-end items-center w-1/3 mr-5 sm:text-base md:text-xl text-xs">
+                {
+                    basket.length === 0 ? 
+                    <span className='m-2'>Basket is empty</span>
+                    :
+                    <span className='m-2'>In cart ({basket.length})</span>
+                }
+                <span className='m-2'> {total.toFixed(2)} </span>
                 <img src={`/images/basket.svg`} alt="basket" className="w-10 h-10"/>
                 {basket.length === 0 ? null :
-                <button className="btn-clear m-2 hover:text-blue-900" onClick={()=>{clearBasket()}}> Clean basket</button>
+                <button className="btn-clear m-2  hover:text-blue-900" onClick={()=>{clearBasket()}}> Clean basket</button>
                 }
             </div>
         </nav>
