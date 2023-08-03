@@ -48,7 +48,7 @@ export const useCartStore = create<CartState>()(immer((set) => ({
 
     addToBasket: (product) => set((state) => {
         const updatedProducts = state.products.map((item) =>
-        item.id === product.id ? { ...item, inBasket: !item.inBasket } : item
+        item.id === product.id ? { ...item, inBasket: true } : item
         );
         state.products = updatedProducts;
         state.basket = [...state.basket, product];
@@ -67,25 +67,53 @@ export const useCartStore = create<CartState>()(immer((set) => ({
     }),
 
     createStore: () =>set((state) => {
-        const dataBasket = localStorage.getItem(`Basket`)
-        const dataProducts = localStorage.getItem(`Products`)
-        if (dataBasket !== null && dataProducts !== null) {
-            state.basket = JSON.parse(dataBasket);
-            state.products = JSON.parse(dataProducts)
-            state.total = state.basket.reduce((total, product) => total + product.price, 0);
-        }
+
     }),
 
     deleteFromBasket: (product) => set((state) => {
-        const updatedProducts = state.products.map((item) =>
-        item.id === product.id ? { ...item, inBasket: !item.inBasket } : item
-        );
-        state.products = updatedProducts;
-        state.basket = state.basket.filter((item) => item.id !== product.id);
-        state.total -= product.price;
-        localStorage.setItem('Products', JSON.stringify(state.products));
-        localStorage.setItem('Basket', JSON.stringify(state.basket));
+
     }),
 
 
 })));
+
+// addToBasket: (product) => set((state) => {
+//     const updatedProducts = state.products.map((item) =>
+//     item.id === product.id ? { ...item, inBasket: true } : item
+//     );
+//     state.products = updatedProducts;
+//     state.basket = [...state.basket, product];
+//     state.total += product.price;
+//     localStorage.setItem('Products', JSON.stringify(state.products));
+//     localStorage.setItem('Basket', JSON.stringify(state.basket));
+// }),
+
+// clearBasket: () => set((state) => {
+//     state.basket = []; 
+//     state.total = 0;
+//     const updatedProducts = state.products.map((item) => ({ ...item, inBasket: false }));
+//     state.products = updatedProducts;
+//     localStorage.setItem('Products', JSON.stringify(state.products));
+//     localStorage.setItem('Basket', JSON.stringify(state.basket));
+// }),
+
+// createStore: () =>set((state) => {
+//     const dataBasket = localStorage.getItem(`Basket`)
+//     const dataProducts = localStorage.getItem(`Products`)
+//     if (dataBasket !== null && dataProducts !== null) {
+//         state.basket = JSON.parse(dataBasket);
+//         state.products = JSON.parse(dataProducts)
+//         state.total = state.basket.reduce((total, product) => total + product.price, 0);
+//     }
+// }),
+
+// deleteFromBasket: (product) => set((state) => {
+//     const updatedProducts = state.products.map((item) =>
+//     item.id === product.id ? { ...item, inBasket: !item.inBasket } : item
+//     );
+//     state.products = updatedProducts;
+//     state.basket = state.basket.filter((item) => item.id !== product.id);
+//     state.total -= product.price;
+//     localStorage.setItem('Products', JSON.stringify(state.products));
+//     localStorage.setItem('Basket', JSON.stringify(state.basket));
+// }),
